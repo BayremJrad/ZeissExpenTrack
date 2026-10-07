@@ -1,0 +1,42 @@
+$kind: http-request
+order: 2000
+url: '{{baseUrl}}/expenses'
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "Integration Test Expense",
+      "amount": 99.99,
+      "category": "Integration Test Category",
+      "date": "2026-10-07",
+      "notes": "Created during integration test run"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 201 Created", function () {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("Response has expense id", function () {
+          const body = pm.response.json();
+          pm.expect(body).to.have.property("id");
+          pm.collectionVariables.set("expenseId", body.id);
+      });
+
+      pm.test("Expense title matches", function () {
+          const body = pm.response.json();
+          pm.expect(body.title).to.eql("Integration Test Expense");
+      });
+
+      pm.test("Expense amount matches", function () {
+          const body = pm.response.json();
+          pm.expect(body.amount).to.eql(99.99);
+      });

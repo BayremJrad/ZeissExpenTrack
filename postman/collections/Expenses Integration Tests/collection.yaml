@@ -1,0 +1,6 @@
+$kind: collection
+name: Expenses Integration Tests
+description: 'End-to-end integration tests for the Expenses Management API. Runs a full CRUD flow: create a category, create an expense, read it, update it, and delete it.'
+variables:
+  - key: baseUrl
+    value: '{{baseUrl}}'

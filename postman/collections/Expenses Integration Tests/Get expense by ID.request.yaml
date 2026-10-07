@@ -1,0 +1,27 @@
+$kind: http-request
+order: 3000
+url: '{{baseUrl}}/expenses/:id'
+method: GET
+headers:
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: id
+    value: '{{expenseId}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 200 OK", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Returns the correct expense", function () {
+          const body = pm.response.json();
+          pm.expect(body.id).to.eql(pm.collectionVariables.get("expenseId"));
+      });
+
+      pm.test("Expense title is correct", function () {
+          const body = pm.response.json();
+          pm.expect(body.title).to.eql("Integration Test Expense");
+      });

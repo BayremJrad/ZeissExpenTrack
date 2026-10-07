@@ -1,0 +1,39 @@
+$kind: http-request
+order: 4000
+url: '{{baseUrl}}/expenses/:id'
+method: PUT
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: id
+    value: '{{expenseId}}'
+body:
+  type: json
+  content: |-
+    {
+      "title": "Integration Test Expense (updated)",
+      "amount": 150.00,
+      "category": "Integration Test Category",
+      "date": "2026-10-07",
+      "notes": "Updated during integration test run"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 200 OK", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Expense title was updated", function () {
+          const body = pm.response.json();
+          pm.expect(body.title).to.eql("Integration Test Expense (updated)");
+      });
+
+      pm.test("Expense amount was updated", function () {
+          const body = pm.response.json();
+          pm.expect(body.amount).to.eql(150.00);
+      });

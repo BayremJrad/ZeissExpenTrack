@@ -1,0 +1,34 @@
+$kind: http-request
+order: 1000
+url: '{{baseUrl}}/categories'
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Integration Test Category",
+      "description": "Created during integration test run"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 201 Created", function () {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("Response has category id", function () {
+          const body = pm.response.json();
+          pm.expect(body).to.have.property("id");
+          pm.collectionVariables.set("categoryId", body.id);
+      });
+
+      pm.test("Category name matches", function () {
+          const body = pm.response.json();
+          pm.expect(body.name).to.eql("Integration Test Category");
+      });
