@@ -1,0 +1,9 @@
+name: Expenses Management API — Stateful Mock
+id: 01a11570-17cb-74aa-9396-e6248eba7741
+protocol: http
+associations: []
+scenarios:
+  - name: default
+    id: 01a11570-195f-736e-ab8d-a28eda428ac0
+    path: ./default.js
+    default: true

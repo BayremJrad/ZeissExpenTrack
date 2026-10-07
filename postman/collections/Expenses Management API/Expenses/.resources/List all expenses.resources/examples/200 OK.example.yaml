@@ -1,0 +1,29 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/expenses"
+  method: GET
+  headers:
+    Accept: application/json
+    Content-Type: application/json
+  queryParams:
+    - key: category
+      value: ""
+      disabled: true
+    - key: startDate
+      value: ""
+      disabled: true
+    - key: endDate
+      value: ""
+      disabled: true
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: '{\n  "data": [\n    { "id": "exp_001", "title": "Team lunch", "amount": 45.50, "category": "Food", "date": "2026-10-07" },\n    { "id": "exp_002", "title": "Flight to NYC", "amount": 320.00, "category": "Travel", "date": "2026-10-05" }\n  ],\n  "total": 2\n}'
+order: 1000

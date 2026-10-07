@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/categories"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Travel",
+      "description": "Business travel expenses"
+    }
+settings: {}
+examples: ./.resources/Create a category.resources/examples
+order: 2000

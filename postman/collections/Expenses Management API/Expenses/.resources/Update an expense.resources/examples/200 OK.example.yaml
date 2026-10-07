@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/expenses/:id"
+  method: PUT
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    id: exp_001
+  body:
+    type: json
+    content: |-
+      {
+        "title": "Team lunch updated",
+        "amount": 50,
+        "category": "Food",
+        "date": "2026-10-07",
+        "notes": "Updated amount"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: '{\n  "id": "exp_001",\n  "title": "Team lunch updated",\n  "amount": 50.00,\n  "category": "Food",\n  "date": "2026-10-07",\n  "notes": "Updated amount"\n}'
+order: 1000

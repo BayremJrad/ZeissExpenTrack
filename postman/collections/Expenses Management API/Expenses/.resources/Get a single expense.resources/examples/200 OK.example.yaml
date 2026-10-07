@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/expenses/:id"
+  method: GET
+  headers:
+    Accept: application/json
+    Content-Type: application/json
+  pathVariables:
+    id: exp_001
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: '{\n  "id": "exp_001",\n  "title": "Team lunch",\n  "amount": 45.50,\n  "category": "Food",\n  "date": "2026-10-07",\n  "notes": "Quarterly team lunch"\n}'
+order: 1000

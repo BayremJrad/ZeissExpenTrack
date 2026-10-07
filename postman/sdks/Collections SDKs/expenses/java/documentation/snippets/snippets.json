@@ -1,0 +1,33 @@
+{
+  "endpoints": {
+    "/expenses": {
+      "get": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\nimport com.expensesmanagementapisdk.models.ListAllExpensesParameters;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tListAllExpensesParameters requestParameters = ListAllExpensesParameters.builder()\n\t\t\t.category(\"category\")\n\t\t\t.startDate(\"startDate\")\n\t\t\t.endDate(\"endDate\")\n\t\t\t.build();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.listAllExpenses(requestParameters);\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n",
+      "post": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\nimport com.expensesmanagementapisdk.models.CreateAnExpenseRequest;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tCreateAnExpenseRequest createAnExpenseRequest = CreateAnExpenseRequest.builder()\n\t\t\t.title(\"Bayrem meeting\")\n\t\t\t.amount(45.5D)\n\t\t\t.category(\"Food\")\n\t\t\t.date(\"2026-10-07\")\n\t\t\t.notes(\"Quarterly team lunch\")\n\t\t\t.build();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.createAnExpense(createAnExpenseRequest);\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n"
+    },
+    "/expenses/{id}": {
+      "get": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.getASingleExpense(\"id\");\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n",
+      "put": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\nimport com.expensesmanagementapisdk.models.UpdateAnExpenseRequest;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tUpdateAnExpenseRequest updateAnExpenseRequest = UpdateAnExpenseRequest.builder()\n\t\t\t.title(\"Team lunch updated\")\n\t\t\t.amount(50D)\n\t\t\t.category(\"Food\")\n\t\t\t.date(\"2026-10-07\")\n\t\t\t.notes(\"Updated amount\")\n\t\t\t.build();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.updateAnExpense(\"id\", updateAnExpenseRequest);\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n",
+      "delete": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.deleteAnExpense(\"id\");\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n"
+    },
+    "/categories": {
+      "get": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.listAllCategories();\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n",
+      "post": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\nimport com.expensesmanagementapisdk.models.CreateACategoryRequest;\n\npublic class Main {\n    public static void main(String[] args) {\n\t\tExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n\t\tCreateACategoryRequest createACategoryRequest = CreateACategoryRequest.builder()\n\t\t\t.name(\"Travel\")\n\t\t\t.description(\"Business travel expenses\")\n\t\t\t.build();\n\n\t\tObject response = expensesManagementApiSdk.expensesManagementApiSdk.createACategory(createACategoryRequest);\n\t\t\t\n\t\tSystem.out.println(response);\n    }\n}\n"
+    }
+  },
+  "methodResponses": {
+    "/expenses": {
+      "get": "System.out.println(response);",
+      "post": "System.out.println(response);"
+    },
+    "/expenses/{id}": {
+      "get": "System.out.println(response);",
+      "put": "System.out.println(response);",
+      "delete": "System.out.println(response);"
+    },
+    "/categories": {
+      "get": "System.out.println(response);",
+      "post": "System.out.println(response);"
+    }
+  },
+  "example": "import com.expensesmanagementapisdk.ExpensesManagementApiSdk;\nimport com.expensesmanagementapisdk.exceptions.ApiError;\nimport com.expensesmanagementapisdk.models.ListAllExpensesParameters;\n  \npublic class Main {\n  public static void main(String[] args) {\n    ExpensesManagementApiSdk expensesManagementApiSdk = new ExpensesManagementApiSdk();\n\n    ListAllExpensesParameters requestParameters = ListAllExpensesParameters.builder()\n\t\t\t.category(\"category\")\n\t\t\t.startDate(\"startDate\")\n\t\t\t.endDate(\"endDate\")\n\t\t\t.build();\n\n\n    try {\n      Object response = expensesManagementApiSdk.expensesManagementApiSdk.listAllExpenses(requestParameters);\n        \n      System.out.println(response);\n    } catch (ApiError e) {\n      e.printStackTrace();\n    }\n\n    System.exit(0);\n  }\n}\n"
+}

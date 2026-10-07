@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/expenses"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: category
+    value: ""
+    disabled: true
+  - key: startDate
+    value: ""
+    disabled: true
+  - key: endDate
+    value: ""
+    disabled: true
+settings: {}
+examples: ./.resources/List all expenses.resources/examples
+order: 1000

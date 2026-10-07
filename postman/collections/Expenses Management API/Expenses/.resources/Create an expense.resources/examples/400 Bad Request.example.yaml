@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/expenses"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "title": "",
+        "amount": 45.5,
+        "category": "Food",
+        "date": "2026-10-07",
+        "notes": "Quarterly team lunch"
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: '{\n  "error": "Validation failed",\n  "details": ["amount is required", "title must not be empty"]\n}'
+order: 2000

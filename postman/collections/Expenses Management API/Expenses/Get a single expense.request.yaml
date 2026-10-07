@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/expenses/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  id: exp_001
+settings: {}
+examples: ./.resources/Get a single expense.resources/examples
+order: 3000

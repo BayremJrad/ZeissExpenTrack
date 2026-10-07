@@ -1,0 +1,21 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/expenses/:id"
+  method: GET
+  headers:
+    Accept: application/json
+    Content-Type: application/json
+  pathVariables:
+    id: exp_999
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: '{\n  "error": "Expense not found"\n}'
+order: 2000

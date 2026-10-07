@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/expenses"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "title": "Team lunch",
+        "amount": 45.5,
+        "category": "Food",
+        "date": "2026-10-07",
+        "notes": "Quarterly team lunch"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: '{\n  "id": "exp_003",\n  "title": "Team lunch",\n  "amount": 45.50,\n  "category": "Food",\n  "date": "2026-10-07",\n  "notes": "Quarterly team lunch"\n}'
+order: 1000

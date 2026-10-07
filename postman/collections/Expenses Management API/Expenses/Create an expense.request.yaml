@@ -1,0 +1,19 @@
+$kind: http-request
+url: "{{baseUrl}}/expenses"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "Bayrem meeting",
+      "amount": 45.5,
+      "category": "Food",
+      "date": "2026-10-07",
+      "notes": "Quarterly team lunch"
+    }
+settings: {}
+examples: ./.resources/Create an expense.resources/examples
+order: 2000

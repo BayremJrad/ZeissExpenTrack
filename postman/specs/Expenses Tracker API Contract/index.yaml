@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: Expenses Management API
+  version: 1.0.XX
+  description: 'This is an expenses managment API'
+servers:
+  - url: https://3053e4c9-717b-4c27-9bdc-30d2c3213f69.mock.pstmn.io
+  - url: ''
+paths:
+  /expenses:
+    get:
+      summary: List all expenses
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+          example: ''
+        - name: startDate
+          in: query
+          schema:
+            type: string
+          example: ''
+        - name: endDate
+          in: query
+          schema:
+            type: string
+          example: ''
+      responses:
+        '200':
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "data": [\n    { "id": "exp_001", "title": "Team lunch",
+                "amount": 45.50, "category": "Food", "date": "2026-10-07"
+                },\n    { "id": "exp_002", "title": "Flight to NYC", "amount":
+                320.00, "category": "Travel", "date": "2026-10-05" }\n  ],\n 
+                "total": 2\n}
+      tags:
+        - Expenses
+    post:
+      summary: Create an expense
+      responses:
+        '201':
+          description: 201 Created
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "id": "exp_003",\n  "title": "Team lunch",\n  "amount":
+                45.50,\n  "category": "Food",\n  "date": "2026-10-07",\n 
+                "notes": "Quarterly team lunch"\n}
+        '400':
+          description: 400 Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "error": "Validation failed",\n  "details": ["amount is
+                required", "title must not be empty"]\n}
+      tags:
+        - Expenses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                amount:
+                  type: number
+                category:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                notes:
+                  type: string
+            example:
+              title: Bayrem meeting
+              amount: 45.5
+              category: Food
+              date: '2026-10-07'
+              notes: Quarterly team lunch
+  /expenses/{id}:
+    get:
+      summary: Get a single expense
+      responses:
+        '200':
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "id": "exp_001",\n  "title": "Team lunch",\n  "amount":
+                45.50,\n  "category": "Food",\n  "date": "2026-10-07",\n 
+                "notes": "Quarterly team lunch"\n}
+        '404':
+          description: 404 Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+              example: '{\n  "error": "Expense not found"\n}'
+      tags:
+        - Expenses
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: exp_001
+    put:
+      summary: Update an expense
+      responses:
+        '200':
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "id": "exp_001",\n  "title": "Team lunch updated",\n 
+                "amount": 50.00,\n  "category": "Food",\n  "date":
+                "2026-10-07",\n  "notes": "Updated amount"\n}
+      tags:
+        - Expenses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                amount:
+                  type: integer
+                category:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                notes:
+                  type: string
+            example:
+              title: Team lunch updated
+              amount: 50
+              category: Food
+              date: '2026-10-07'
+              notes: Updated amount
+    delete:
+      summary: Delete an expense
+      responses:
+        '204':
+          description: 204 No Content
+      tags:
+        - Expenses
+  /categories:
+    get:
+      summary: List all categories
+      responses:
+        '200':
+          description: 200 OK
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "data": [\n    { "id": "cat_001", "name": "Food",
+                "description": "Meals and dining" },\n    { "id": "cat_002",
+                "name": "Travel", "description": "Business travel expenses" }\n 
+                ]\n}
+      tags:
+        - Categories
+    post:
+      summary: Create a category
+      responses:
+        '201':
+          description: 201 Created
+          content:
+            application/json:
+              schema:
+                type: object
+              example: >-
+                {\n  "id": "cat_003",\n  "name": "Travel",\n  "description":
+                "Business travel expenses"\n}
+      tags:
+        - Categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+            example:
+              name: Travel
+              description: Business travel expenses
+
